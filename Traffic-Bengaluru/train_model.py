@@ -1,7 +1,7 @@
 """
 =============================================================================
 Smart Parking Intelligence System - Model Training Pipeline
-=============================================================================
+=========================================================================== 
 Author  : Hackathon Team
 Dataset : Bangalore Parking Violations (Jan–May 2024)
 Purpose : Train ML models to predict illegal parking severity level
@@ -37,9 +37,9 @@ from sklearn.impute import SimpleImputer
 # SECTION 1 ── Data Loading & Raw EDA
 # ══════════════════════════════════════════════════════════════════════════════
 
-RAW_DATA_PATH = "/mnt/user-data/uploads/jan_to_may_police_violation_anonymized791b166.csv"
-OUTPUT_DIR    = "/mnt/user-data/outputs"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+RAW_DATA_PATH = "data/jan_to_may_police_violation_anonymized791b166.csv"
+OUTPUT_DIR = "outputs"
 
 SEED = 42
 np.random.seed(SEED)
@@ -527,6 +527,10 @@ def save_artefacts(best_model, best_name, label_encoder, encoders, pci_scaler, o
 
 def main():
     # ── Load & engineer features ────────────────────────────────────────────
+ 
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # ── Load & engineer features ──
     df_raw = load_raw_data(RAW_DATA_PATH)
     df, pci_scaler = build_features(df_raw)
     save_eda_plots(df, OUTPUT_DIR)
